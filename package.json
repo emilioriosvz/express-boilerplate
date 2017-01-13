@@ -1,0 +1,44 @@
+{
+  "name": "express-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": ">=4.6.0",
+    "npm": ">=2.15.9",
+    "yarn": ">=0.17.9"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+   "keywords": [
+    "express",
+    "node",
+    "mongodb",
+    "mongoose",
+    "es6",
+    "REST",
+    "API",
+    "boilerplate"
+  ],
+  "author": "Emilio <emilioriosvz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.0",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.1",
+    "express": "^4.9.5",
+    "express-session": "^1.14.1",
+    "express-validation": "^1.0.1",
+    "helmet": "^3.3.0",
+    "joi": "^10.1.0",
+    "jsonwebtoken": "^7.2.1",
+    "mongoose": "^4.7.6",
+    "morgan": "^1.7.0",
+    "multer": "^1.2.0",
+    "request": "^2.75.0"
+  }
+}
