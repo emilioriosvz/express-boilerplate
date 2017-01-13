@@ -29,6 +29,15 @@ yarn
 * Promises via [Bluebird](http://bluebirdjs.com/docs/getting-started.html)
 * API parameter validation via [express-validation](https://github.com/ctavan/express-validator) using [Joi](https://github.com/hapijs/joi)
 
+## Todo list
+
+If you like what you see, there are some tasks that would have to be done:
+
+* Add testing
+* Add code coverage
+* Add eslint
+* Add logger
+
 ## Contributing
 
 Contributions, questions and comments are all welcome.🤘
