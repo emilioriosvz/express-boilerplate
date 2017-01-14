@@ -2,6 +2,7 @@
 [![MIT License](https://img.shields.io/npm/l/stack-overflow-copy-paste.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Code Climate](https://codeclimate.com/github/emilioriosvz/express-boilerplate/badges/gpa.svg)](https://codeclimate.com/github/emilioriosvz/express-boilerplate)
+[![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 ## Getting Started
 Clone the repo:
@@ -18,6 +19,22 @@ npm install -g yarn
 Install dependencies:
 ```sh
 yarn
+```
+
+## Run the project in docker
+Build the image:
+```sh
+docker build -t <your username>/express-boilerplate .
+```
+
+If the image was created correctly, you can see it doing:
+```js
+docker images
+```
+
+Run the image:
+```sh
+docker run -p 3000:3000 -d --name express-boilerplate <your username>/express-boilerplate
 ```
 
 ## Features
