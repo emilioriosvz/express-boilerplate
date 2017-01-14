@@ -16,7 +16,37 @@ Promise = require('bluebird')
 const mongoose = require('mongoose')
 // plugin bluebird promise in mongoose
 mongoose.Promise = Promise
-mongoose.connect(config.database.host)
+
+// connect with mongodb with auto-reconnect
+let mongodbConnectedBefore = false
+let mongoOpts = {server: { auto_reconnect: true }}
+const connect = () => mongoose.connect(config.database.host, mongoOpts)
+connect()
+
+mongoose.connection.on('error', (error) => console.log('Could not connect to MongoDB'))
+
+mongoose.connection.on('disconnected', () => {
+  console.log('Lost MongoDB connection...')
+  if (!mongodbConnectedBefore) {
+    setTimeout(() => connect(), 3000)
+  }
+})
+
+mongoose.connection.on('connected', () => {
+  mongodbConnectedBefore = true
+  console.log('Connection established to MongoDB')
+})
+
+mongoose.connection.on('reconnected', () => console.log('Reconnected to MongoDB'))
+
+// Close the Mongoose connection, when receiving SIGINT
+process.on('SIGINT', () => {
+  mongoose.connection.close(() => {
+    console.log('Force to close the MongoDB conection')
+    process.exit(0)
+  })
+})
+
 
 const app = express()
 
