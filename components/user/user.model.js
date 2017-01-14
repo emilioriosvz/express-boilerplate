@@ -1,8 +1,6 @@
 'use strict'
 
-const customError = require('../../helpers/errors')
-const utils = require('../../helpers/utils')
-const config = require('../../config/')
+const CustomError = require('../../helpers/errors')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcryptjs')
@@ -22,19 +20,21 @@ var userSchema = new Schema({
   confirmed: { type: Boolean, default: false }
 })
 
-userSchema.pre('save', function (next)  {
-    var user = this
-    // only hash the password if it has been modified (or is new)
-    if (!user.isModified('password')) return next()
-    bcrypt.genSalt(10, (err, salt) => {
+userSchema.pre('save', function (next) {
+  var user = this
+  // only hash the password if it has been modified (or is new)
+  if (!user.isModified('password')) return next()
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) return next(err)
+
+    bcrypt.hash(user.password, salt, (err, hash) => {
       if (err) return next(err)
 
-      bcrypt.hash(user.password, salt, (err, hash) => {
-        user.password = hash
-        return next()
-      })
+      user.password = hash
+      return next()
     })
-});
+  })
+})
 
 /**
  * Check the password
@@ -52,19 +52,19 @@ userSchema.statics = {
   /**
    * Get user
    * @param {ObjectId} id - The objectId of user.
-   * @returns {Promise<User, customErrorr>}
+   * @returns {Promise<User, CustomErrorr>}
    */
-  get(id) {
+  get (id) {
     return this.findById(id)
       .exec()
       .then((user) => {
         if (user) {
-          return user;
+          return user
         }
-        const error = customError('Authentication error')
-        return Promise.reject(error);
-      });
+        const error = CustomError('Authentication error')
+        return Promise.reject(error)
+      })
   }
-};
+}
 
 module.exports = mongoose.model('User', userSchema)

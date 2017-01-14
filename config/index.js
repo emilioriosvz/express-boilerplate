@@ -21,7 +21,7 @@ if (app.enviroment.development) {
   app.database = {
     host: 'localhost:27017/express-boilerplate-dev'
   }
-  app["MONGOOSE_DEBUG"] =  true
+  app['MONGOOSE_DEBUG'] = true
   app.jwtSecret = secrets.jwtSecret
 }
 
@@ -32,7 +32,7 @@ if (app.enviroment.test) {
   app.database = {
     host: 'localhost:27017/express-boilerplate-test'
   }
-  app["MONGOOSE_DEBUG"] =  true
+  app['MONGOOSE_DEBUG'] = true
   app.jwtSecret = secrets.jwtSecret
 }
 
@@ -46,6 +46,5 @@ if (app.enviroment.production) {
   app['MONGOOSE_DEBUG'] = false
   app.jwtSecret = secrets.jwtSecret
 }
-
 
 module.exports = app

@@ -2,7 +2,7 @@
 
 function mongooseToObject (mongooseObject) {
   mongooseObject = mongooseObject.toObject()
-  delete mongooseObject["__v"]
+  delete mongooseObject['__v']
   if (mongooseObject.password) delete mongooseObject.password
 
   return mongooseObject

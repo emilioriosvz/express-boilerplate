@@ -23,7 +23,7 @@ let mongoOpts = {server: { auto_reconnect: true }}
 const connect = () => mongoose.connect(config.database.host, mongoOpts)
 connect()
 
-mongoose.connection.on('error', (error) => console.log('Could not connect to MongoDB'))
+mongoose.connection.on('error', () => console.log('Could not connect to MongoDB'))
 
 mongoose.connection.on('disconnected', () => {
   console.log('Lost MongoDB connection...')
@@ -47,10 +47,9 @@ process.on('SIGINT', () => {
   })
 })
 
-
 const app = express()
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')))
 
 // secure apps by setting various HTTP headers
 app.use(helmet())
@@ -79,4 +78,4 @@ app.use((error, req, res, next) => {
   }
 })
 
-app.listen(config.port, () =>  console.log(`express-boilerplate on port ${config.port}`))
+app.listen(config.port, () => console.log(`express-boilerplate on port ${config.port}`))
